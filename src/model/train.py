@@ -7,12 +7,18 @@ import os
 import pandas as pd
 
 from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+import mlflow
 
 
 # define functions
 def main(args):
     # TO DO: enable autologging
+    mlflow.autolog()
 
+    # log parameters
+    mlflow.log_param("training_data", args.training_data)
+    mlflow.log_param("reg_rate", args.reg_rate)
 
     # read data
     df = get_csvs_df(args.training_data)
@@ -22,6 +28,9 @@ def main(args):
 
     # train model
     train_model(args.reg_rate, X_train, X_test, y_train, y_test)
+
+    # log metrics
+    mlflow.log_metric("accuracy", model.score(X_test, y_test))
 
 
 def get_csvs_df(path):
@@ -34,11 +43,16 @@ def get_csvs_df(path):
 
 
 # TO DO: add function to split data
+def split_data(df):
+    X, y = df[['Pregnancies','PlasmaGlucose','DiastolicBloodPressure','TricepsThickness','SerumInsulin','BMI','DiabetesPedigree','Age']].values, df['Diabetic'].values
+    return train_test_split(X, y, test_size=0.30, random_state=0)
 
 
 def train_model(reg_rate, X_train, X_test, y_train, y_test):
     # train model
-    LogisticRegression(C=1/reg_rate, solver="liblinear").fit(X_train, y_train)
+    model = LogisticRegression(C=1/reg_rate, solver="liblinear")
+    model.fit(X_train, y_train)
+    return model
 
 
 def parse_args():
@@ -65,9 +79,12 @@ if __name__ == "__main__":
 
     # parse args
     args = parse_args()
+    os.environ['MLFLOW_TRACKING_URI'] = "azureml"
 
-    # run main function
-    main(args)
+    # Start MLflow run
+    with mlflow.start_run(run_id=None, experiment_id=None):
+        # run main function
+        main(args)
 
     # add space in logs
     print("*" * 60)

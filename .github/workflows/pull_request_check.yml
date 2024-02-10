@@ -10,6 +10,23 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Placeholder
+    - name: Use Python version 3.8
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies
       run: |
-        echo "Will add code checks here in the next challenge"
+        pip install -r requirements.txt
+
+    - name: Install Flake8
+      run: |
+        python -m pip install flake8
+
+    - name: Run linting tests
+      run: |
+        flake8 src/model/
+
+    - name: Run pytest
+      run: |
+        pytest tests/

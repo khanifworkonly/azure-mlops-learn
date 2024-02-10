@@ -1,0 +1,18 @@
+{
+  "condition": null,
+  "conditionVersion": null,
+  "createdBy": null,
+  "createdOn": "2024-02-07T03:30:58.372229+00:00",
+  "delegatedManagedIdentityResourceId": null,
+  "description": null,
+  "id": "/subscriptions/c118c0e8-2f02-425c-9a8f-c82533c6ae52/resourceGroups/MyLearning/providers/Microsoft.Authorization/roleAssignments/e22e555d-99dd-4407-91ca-4bbd36e13b33",
+  "name": "e22e555d-99dd-4407-91ca-4bbd36e13b33",
+  "principalId": "fa387984-6a2e-450f-8b8b-04cfac94160e",
+  "principalType": "ServicePrincipal",
+  "resourceGroup": "MyLearning",
+  "roleDefinitionId": "/subscriptions/c118c0e8-2f02-425c-9a8f-c82533c6ae52/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c",
+  "scope": "/subscriptions/c118c0e8-2f02-425c-9a8f-c82533c6ae52/resourceGroups/MyLearning",
+  "type": "Microsoft.Authorization/roleAssignments",
+  "updatedBy": "84ab6932-40e0-4f83-b46a-bdf264a4d2fa",
+  "updatedOn": "2024-02-07T03:30:58.737227+00:00"
+}

@@ -17,7 +17,7 @@ jobs:
         creds: ${{secrets.AZURE_CREDENTIALS_GLOBAL}}
     - name: setup
       run: bash setup.sh
-      continue-on-error: true 
+      # continue-on-error: true 
     - name: Run Azure ML Job
       working-directory: src
       run: |

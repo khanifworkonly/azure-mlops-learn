@@ -8,6 +8,7 @@ import pandas as pd
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import f1_score
 import mlflow
 
 
@@ -17,14 +18,16 @@ def main(args):
     mlflow.autolog()
 
     # log parameters
-    mlflow.log_param("training_data", args.training_data)
-    mlflow.log_param("reg_rate", args.reg_rate)
+    # mlflow.log_param("training_data", args.training_data)
+    # mlflow.log_param("reg_rate", args.reg_rate)
 
     # read data
     df = get_csvs_df(args.training_data)
+    print(df.head())
 
     # split data
     X_train, X_test, y_train, y_test = split_data(df)
+    print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
     # train model
     train_model(args.reg_rate, X_train, X_test, y_train, y_test)
@@ -56,6 +59,8 @@ def train_model(reg_rate, X_train, X_test, y_train, y_test):
     # train model
     model = LogisticRegression(C=1/reg_rate, solver="liblinear")
     model.fit(X_train, y_train)
+    y_test_pred = model.predict(X_test)
+    print(f1_score(y_test, y_test_pred))
     return model
 
 
@@ -84,12 +89,9 @@ if __name__ == "__main__":
 
     # parse args
     args = parse_args()
-    os.environ['MLFLOW_TRACKING_URI'] = "azureml"
 
-    # Start MLflow run
-    with mlflow.start_run(run_id=None, experiment_id=None):
-        # run main function
-        main(args)
+    # run main function
+    main(args)
 
     # add space in logs
     print("*" * 60)

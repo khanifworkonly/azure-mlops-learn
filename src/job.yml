@@ -7,9 +7,9 @@ command: >-
 inputs:
   training_data: 
     type: uri_folder 
-    path: azureml://subscriptions/c118c0e8-2f02-425c-9a8f-c82533c6ae52/resourcegroups/MyLearning/workspaces/AML-1/datastores/workspaceblobstore/paths/UI/2024-02-04_072547_UTC/
+    path: azureml://subscriptions/c118c0e8-2f02-425c-9a8f-c82533c6ae52/resourcegroups/MyLearning/workspaces/AML-Development/datastores/workspaceblobstore/paths/UI/2024-02-18_042929_UTC/data/
   reg_rate: 0.01
 environment: azureml:learning-env-ml:1
-compute: azureml:khanif-compute1
+compute: azureml:dev-compute1
 experiment_name: diabetes-1
 description: Train a classification model on diabetes data using a registered dataset as input.

@@ -9,32 +9,23 @@ import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import f1_score
-import mlflow
+from mlflow.sklearn import autolog
 
 
 # define functions
 def main(args):
     # TO DO: enable autologging
-    mlflow.autolog()
-
-    # log parameters
-    # mlflow.log_param("training_data", args.training_data)
-    # mlflow.log_param("reg_rate", args.reg_rate)
+    autolog()
 
     # read data
     df = get_csvs_df(args.training_data)
-    print(df.head())
 
     # split data
     X_train, X_test, y_train, y_test = split_data(df)
-    print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
     # train model
     train_model(args.reg_rate, X_train, X_test, y_train, y_test)
-
-    # log metrics
-    # mlflow.log_metric("accuracy", model.score(X_test, y_test))
-
+    
 
 def get_csvs_df(path):
     if not os.path.exists(path):

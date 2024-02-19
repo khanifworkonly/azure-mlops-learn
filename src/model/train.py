@@ -8,17 +8,14 @@ import pandas as pd
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-import mlflow
+from sklearn.metrics import f1_score
+from mlflow.sklearn import autolog
 
 
 # define functions
 def main(args):
     # TO DO: enable autologging
-    mlflow.autolog()
-
-    # log parameters
-    mlflow.log_param("training_data", args.training_data)
-    mlflow.log_param("reg_rate", args.reg_rate)
+    autolog()
 
     # read data
     df = get_csvs_df(args.training_data)
@@ -28,10 +25,7 @@ def main(args):
 
     # train model
     train_model(args.reg_rate, X_train, X_test, y_train, y_test)
-
-    # log metrics
-    mlflow.log_metric("accuracy", model.score(X_test, y_test))
-
+    
 
 def get_csvs_df(path):
     if not os.path.exists(path):
@@ -44,7 +38,11 @@ def get_csvs_df(path):
 
 # TO DO: add function to split data
 def split_data(df):
-    X, y = df[['Pregnancies','PlasmaGlucose','DiastolicBloodPressure','TricepsThickness','SerumInsulin','BMI','DiabetesPedigree','Age']].values, df['Diabetic'].values
+    X, y = df[[
+        'Pregnancies', 'PlasmaGlucose', 'DiastolicBloodPressure',
+        'TricepsThickness', 'SerumInsulin', 'BMI', 'DiabetesPedigree',
+        'Age'
+    ]].values, df['Diabetic'].values
     return train_test_split(X, y, test_size=0.30, random_state=0)
 
 
@@ -52,6 +50,8 @@ def train_model(reg_rate, X_train, X_test, y_train, y_test):
     # train model
     model = LogisticRegression(C=1/reg_rate, solver="liblinear")
     model.fit(X_train, y_train)
+    y_test_pred = model.predict(X_test)
+    print(f1_score(y_test, y_test_pred))
     return model
 
 
@@ -71,6 +71,7 @@ def parse_args():
     # return args
     return args
 
+
 # run script
 if __name__ == "__main__":
     # add space in logs
@@ -79,12 +80,9 @@ if __name__ == "__main__":
 
     # parse args
     args = parse_args()
-    os.environ['MLFLOW_TRACKING_URI'] = "azureml"
 
-    # Start MLflow run
-    with mlflow.start_run(run_id=None, experiment_id=None):
-        # run main function
-        main(args)
+    # run main function
+    main(args)
 
     # add space in logs
     print("*" * 60)

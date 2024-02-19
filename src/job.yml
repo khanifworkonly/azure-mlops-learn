@@ -7,9 +7,10 @@ command: >-
 inputs:
   training_data: 
     type: uri_folder 
-    path: azureml://subscriptions/c118c0e8-2f02-425c-9a8f-c82533c6ae52/resourcegroups/MyLearning/workspaces/AML-1/datastores/workspaceblobstore/paths/UI/2024-02-04_072547_UTC/
+    # path: azureml://subscriptions/c118c0e8-2f02-425c-9a8f-c82533c6ae52/resourcegroups/MyLearning/workspaces/AML-Development/datastores/workspaceblobstore/paths/UI/2024-02-18_042929_UTC/data/
+    path: azureml:diabetes-dev-folder:1
   reg_rate: 0.01
-environment: azureml:learning-env-ml:1
-compute: azureml:khanif-compute1
+environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
+compute: azureml:dev-compute1
 experiment_name: diabetes-1
 description: Train a classification model on diabetes data using a registered dataset as input.

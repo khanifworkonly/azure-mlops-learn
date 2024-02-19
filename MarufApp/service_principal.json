@@ -1,0 +1,51 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#servicePrincipals/$entity",
+  "accountEnabled": true,
+  "addIns": [],
+  "alternativeNames": [],
+  "appDescription": null,
+  "appDisplayName": "MarufApp",
+  "appId": "dc8a094e-d6d3-4dd7-8c44-365ad4a38926",
+  "appOwnerOrganizationId": "b2891c89-1037-4ab7-aeef-3f16a3cc3eef",
+  "appRoleAssignmentRequired": false,
+  "appRoles": [],
+  "applicationTemplateId": null,
+  "createdDateTime": "2024-02-19T16:42:11Z",
+  "deletedDateTime": null,
+  "description": null,
+  "disabledByMicrosoftStatus": null,
+  "displayName": "MarufApp",
+  "homepage": null,
+  "id": "78caea16-b69d-4ba6-be2a-9ca7256a10ef",
+  "info": {
+    "logoUrl": null,
+    "marketingUrl": null,
+    "privacyStatementUrl": null,
+    "supportUrl": null,
+    "termsOfServiceUrl": null
+  },
+  "keyCredentials": [],
+  "loginUrl": null,
+  "logoutUrl": null,
+  "notes": null,
+  "notificationEmailAddresses": [],
+  "oauth2PermissionScopes": [],
+  "passwordCredentials": [],
+  "preferredSingleSignOnMode": null,
+  "preferredTokenSigningKeyThumbprint": null,
+  "replyUrls": [],
+  "resourceSpecificApplicationPermissions": [],
+  "samlSingleSignOnSettings": null,
+  "servicePrincipalNames": [
+    "dc8a094e-d6d3-4dd7-8c44-365ad4a38926"
+  ],
+  "servicePrincipalType": "Application",
+  "signInAudience": "AzureADandPersonalMicrosoftAccount",
+  "tags": [],
+  "tokenEncryptionKeyId": null,
+  "verifiedPublisher": {
+    "addedDateTime": null,
+    "displayName": null,
+    "verifiedPublisherId": null
+  }
+}

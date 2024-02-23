@@ -1,0 +1,42 @@
+# name: Build and Deploy
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   build development:
+#     runs-on: ubuntu-latest
+#     environment:
+#       name: development
+#     steps:
+#       - name: check out repo
+#         uses: actions/checkout@v2
+#       - name: install az ml extension
+#         run: az extension add -n ml -y
+#       - name: azure login
+#         uses: azure/login@v1
+#         with:
+#           creds: ${{secrets.AZURE_CREDENTIALS}}
+#       - name: run job
+#         run: |
+#           az ml job create --file job.yml --resource-group MyLearning --workspace-name AML-Development
+
+#   build production:
+#     runs-on: ubuntu-latest    
+#     environment:
+#       name: production
+#     # needs: build_and_test  # Wait for the build_and_test job to finish before starting this job
+#     steps:
+#       - name: check out repo
+#         uses: actions/checkout@v2
+#       - name: install az ml extension
+#         run: az extension add -n ml -y
+#       - name: azure login
+#         uses: azure/login@v1
+#         with:
+#           creds: ${{secrets.AZURE_CREDENTIALS}}
+#       - name: run job
+#         run: |
+#           az ml job create --file job.yml --resource-group MyLearning --workspace-name AML-Production
